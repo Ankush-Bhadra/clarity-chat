@@ -1,50 +1,75 @@
-![Discord-Clone-Part1-2400x1350px](https://github.com/GetStream/discord-clone-nextjs/assets/12433593/3c15c77d-7c7c-45fc-b7ba-a26ae20a2842)
+# Clarity Chat 🗨️
 
-# Discord Clone using NextJS, TailwindCSS, and Stream
+Clarity Chat is a community chat application similar to Discord, designed to facilitate seamless communication among users. With features like channels, direct messaging, and community engagement tools, Clarity Chat aims to create a friendly and inclusive environment for discussions and collaborations.
 
-This repository accompanies the series of blog posts published on the Stream Blog about creating a Discord clone using [NextJS](https://nextjs.org), [TailwindCSS](https://tailwindcss.com), and the Stream [Chat](https://getstream.io/chat/docs/) and [Video](https://getstream.io/video/docs/) SDKs.
+## Table of Contents
+- [Introduction](#introduction)
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Collaborators](#collaborators)
+- [Getting Started](#getting-started)
 
-The series will have five posts at the end (we'll have the links updated once they are published):
+# Introduction 🌟
 
-- [Part 1: Setup Project](https://getstream.io/blog/discord-clone-project-setup/)
-- [Part 2: General Layout and Server List](https://getstream.io/blog/discord-clone-server-list/)
-- Part 3: Channel List UI (coming soon)
-- Part 4: Message List UI
-- Part 5: Adding video and audio calling
+Clarity Chat is built for communities, friends, and teams to connect in real-time. With a user-friendly interface and robust features, Clarity Chat makes it easy to join or create channels, send direct messages, share files, and manage group discussions. Whether you're organizing an event, collaborating on a project, or just hanging out with friends, Clarity Chat has you covered!
 
----
+## Screenshots 📸
 
-## Running the project
+![Home Screen](path/to/screenshot1.png)
+*Home Screen*
 
-### Prerequisites
+![Channel View](path/to/screenshot2.png)
+*Channel View*
 
-First, a machine running [Node.js](https://nodejs.org/en) and the option to clone the repository. The rest of the setup is explained in [Part 1](https://getstream.io/blog/discord-clone-project-setup/).
+![Direct Messaging](path/to/screenshot3.png)
+*Direct Messaging*
 
-Second, an account with Stream. We have a [free tier](https://getstream.io/pricing/#chat), and we can create an account for free using [this link](https://http://getstream.io/try-for-free/).
+## Features 🔑
 
-### Running locally
+- **Real-time Messaging**: Chat with friends and communities in real-time. 💬
+- **Channel Creation**: Create and manage public or private channels for various topics. 📅
+- **Direct Messaging**: Send private messages to other users. ✉️
+- **User Profiles**: Customize your profile with a username, avatar, and bio. 👤
+- **File Sharing**: Share images, documents, and other files within chats. 📂
+- **Emojis and Reactions**: Use emojis and reactions to enhance your conversations. 😊
+- **Notifications**: Stay updated with new messages and mentions. 🔔
 
-The first thing to do is install dependencies:
+## Collaborators 🤝
 
-```bash
-npm install
-# or
-yarn
+- [Ankush Bhadra](https://github.com/Ankush-Bhadra) - Project Lead
+- [Partha Sarathi Ghosh]() - Developer
+- [Pritam Mondal]() - Developer
+- [Samojit Mondal]() - Developer
+
+## Getting Started 🚀
+
+To get started with Clarity Chat, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/clarity-chat.git
+   cd clarity-chat
+   ```
+
+2. **Install Dependencies**:
+   Install the necessary dependencies using your package manager (e.g., npm, yarn):
+   ```bash
+   npm install
+   ```
+
+3. **Run the Application**:
+   Start the development server:
+   ```bash
+   npm start
+   ```
+
+4. **Access the App**:
+   Open your web browser and go to `http://localhost:3000` to access Clarity Chat. 🌐
+
+5. **Create an Account**:
+   Follow the on-screen instructions to create an account and start chatting! 🎉
+
+## License 📄
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ```
-
-Then we can run the project on our machine in development mode:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-## Use the Stream SDKs yourself
-
-You can get started with the Stream SDKs today [for free](https://http://getstream.io/try-for-free/).
-
-Find our React documentation here:
-
-- [Chat SDK](https://getstream.io/chat/sdk/react/)
-- [Video and Audio SDK](https://getstream.io/video/docs/react/)
