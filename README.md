@@ -15,14 +15,11 @@ Clarity Chat is built for communities, friends, and teams to connect in real-tim
 
 ## Screenshots 📸
 
-![Home Screen](path/to/screenshot1.png)
+![Home Screen](https://github.com/user-attachments/assets/52c8be6f-fda3-497b-84a8-25e0d64698b8)
 *Home Screen*
 
-![Channel View](path/to/screenshot2.png)
-*Channel View*
-
-![Direct Messaging](path/to/screenshot3.png)
-*Direct Messaging*
+![Direct Messaging](https://github.com/user-attachments/assets/2b75143f-9f9b-40a5-ab52-2e4760235b9c)
+*Calling Interface*
 
 ## Features 🔑
 
@@ -72,4 +69,3 @@ To get started with Clarity Chat, follow these steps:
 ## License 📄
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
