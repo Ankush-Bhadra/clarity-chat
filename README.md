@@ -18,7 +18,7 @@ Clarity Chat is built for communities, friends, and teams to connect in real-tim
 ![Home Screen](https://github.com/user-attachments/assets/52c8be6f-fda3-497b-84a8-25e0d64698b8)
 *Home Screen*
 
-![Direct Messaging](https://github.com/user-attachments/assets/2b75143f-9f9b-40a5-ab52-2e4760235b9c)
+![Direct Messaging](https://github.com/user-attachments/assets/4bf113df-197e-4d46-9191-922a3740cdc2)
 *Calling Interface*
 
 ## Features 🔑
