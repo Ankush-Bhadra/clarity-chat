@@ -7,7 +7,7 @@ import CreateServerForm from './CreateServerForm';
 import Link from 'next/link';
 import { Channel } from 'stream-chat';
 
-// Rename the local interface to LocalDiscordServer
+// Rename the local interface to avoid conflict
 interface LocalDiscordServer {
   name: string;
   image?: string; // Optional property
@@ -29,16 +29,14 @@ const ServerList = () => {
         .map((channel: Channel) => {
           // Check if channel.data is defined before accessing its properties
           const channelData = channel.data?.data; // Use optional chaining
-          return channelData ? {
-            name: channelData.server ?? 'Unknown', // Use nullish coalescing for default value
-            image: channelData.image, // Safely access image property
-          } : null; // Return null if channelData is undefined
+          return channelData
+            ? {
+                name: channelData.server ?? 'Unknown', // Use nullish coalescing for default value
+                image: channelData.image, // Safely access image property
+              }
+            : null; // Return null if channelData is undefined
         })
-        .filter((server: LocalDiscordServer | null) => server !== null && server.name !== 'Unknown') // Filter out null values
-        .filter(
-          (server: LocalDiscordServer, index, self) =>
-            index === self.findIndex((serverObject) => serverObject.name === server.name)
-        )
+        .filter((server): server is LocalDiscordServer => server !== null && server.name !== 'Unknown') // Filter out null values and unknown servers
     );
 
     const serverArray = Array.from(serverSet.values());
