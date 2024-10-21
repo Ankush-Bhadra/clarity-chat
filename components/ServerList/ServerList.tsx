@@ -1,45 +1,37 @@
 import { useChatContext } from 'stream-chat-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { DiscordServer as AppDiscordServer } from '@/app/page'; // Renamed import to avoid conflict
+import { DiscordServer } from '@/app/page';
 import { useDiscordContext } from '@/contexts/DiscordContext';
 import CreateServerForm from './CreateServerForm';
 import Link from 'next/link';
 import { Channel } from 'stream-chat';
 
-// Rename the local interface to avoid conflict
-interface LocalDiscordServer {
-  name: string;
-  image?: string; // Optional property
-}
-
 const ServerList = () => {
   const { client } = useChatContext();
   const { server: activeServer, changeServer } = useDiscordContext();
-  const [serverList, setServerList] = useState<LocalDiscordServer[]>([]);
+  const [serverList, setServerList] = useState<DiscordServer[]>([]);
 
   const loadServerList = useCallback(async (): Promise<void> => {
     const channels = await client.queryChannels({
       type: 'messaging',
       members: { $in: [client.userID as string] },
     });
-
-    const serverSet: Set<LocalDiscordServer> = new Set(
+    const serverSet: Set<DiscordServer> = new Set(
       channels
         .map((channel: Channel) => {
-          // Check if channel.data is defined before accessing its properties
-          const channelData = channel.data?.data; // Use optional chaining
-          if (channelData) {
-            return {
-              name: channelData.server ?? 'Unknown', // Use nullish coalescing for default value
-              image: channelData.image, // Safely access image property
-            };
-          }
-          return undefined; // Return undefined for invalid channels
+          return {
+            name: (channel.data?.data?.server as string) ?? 'Unknown',
+            image: channel.data?.data?.image,
+          };
         })
-        .filter((server): server is LocalDiscordServer => server !== undefined && server.name !== 'Unknown') // Filter out undefined and unknown servers
+        .filter((server: DiscordServer) => server.name !== 'Unknown')
+        .filter(
+          (server: DiscordServer, index, self) =>
+            index ===
+            self.findIndex((serverObject) => serverObject.name == server.name)
+        )
     );
-
     const serverArray = Array.from(serverSet.values());
     setServerList(serverArray);
     if (serverArray.length > 0) {
@@ -100,9 +92,9 @@ const ServerList = () => {
     </div>
   );
 
-  function checkIfUrl(path: string): boolean { // Changed to 'boolean' (lowercase b)
+  function checkIfUrl(path: string): Boolean {
     try {
-      new URL(path);
+      const _ = new URL(path);
       return true;
     } catch (_) {
       return false;
@@ -111,3 +103,5 @@ const ServerList = () => {
 };
 
 export default ServerList;
+
+update
