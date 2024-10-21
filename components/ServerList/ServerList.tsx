@@ -1,13 +1,13 @@
 import { useChatContext } from 'stream-chat-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { DiscordServer } from '@/app/page';
+import { DiscordServer as AppDiscordServer } from '@/app/page'; // Rename the imported type
 import { useDiscordContext } from '@/contexts/DiscordContext';
 import CreateServerForm from './CreateServerForm';
 import Link from 'next/link';
 import { Channel } from 'stream-chat';
 
-// Define the structure for DiscordServer
+// Use the original name for the local interface
 interface DiscordServer {
   name: string;
   image?: string; // Optional property
