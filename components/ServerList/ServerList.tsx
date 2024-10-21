@@ -7,6 +7,12 @@ import CreateServerForm from './CreateServerForm';
 import Link from 'next/link';
 import { Channel } from 'stream-chat';
 
+// Define the structure for DiscordServer
+interface DiscordServer {
+  name: string;
+  image?: string; // Optional property
+}
+
 const ServerList = () => {
   const { client } = useChatContext();
   const { server: activeServer, changeServer } = useDiscordContext();
@@ -17,21 +23,23 @@ const ServerList = () => {
       type: 'messaging',
       members: { $in: [client.userID as string] },
     });
+
     const serverSet: Set<DiscordServer> = new Set(
       channels
         .map((channel: Channel) => {
+          const channelData = channel.data.data; // Ensure TypeScript understands the structure
           return {
-            name: (channel.data?.data?.server as string) ?? 'Unknown',
-            image: channel.data?.data?.image,
+            name: channelData?.server ?? 'Unknown', // Optional chaining and default value
+            image: channelData?.image, // Optional chaining for image
           };
         })
         .filter((server: DiscordServer) => server.name !== 'Unknown')
         .filter(
           (server: DiscordServer, index, self) =>
-            index ===
-            self.findIndex((serverObject) => serverObject.name == server.name)
+            index === self.findIndex((serverObject) => serverObject.name === server.name)
         )
     );
+
     const serverArray = Array.from(serverSet.values());
     setServerList(serverArray);
     if (serverArray.length > 0) {
@@ -92,9 +100,9 @@ const ServerList = () => {
     </div>
   );
 
-  function checkIfUrl(path: string): Boolean {
+  function checkIfUrl(path: string): boolean { // Changed to 'boolean' (lowercase b)
     try {
-      const _ = new URL(path);
+      new URL(path);
       return true;
     } catch (_) {
       return false;
