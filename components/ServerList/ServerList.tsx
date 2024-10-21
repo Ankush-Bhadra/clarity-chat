@@ -1,14 +1,14 @@
 import { useChatContext } from 'stream-chat-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { DiscordServer as AppDiscordServer } from '@/app/page'; // Rename the imported type
+import { DiscordServer as AppDiscordServer } from '@/app/page'; // Renamed import to avoid conflict
 import { useDiscordContext } from '@/contexts/DiscordContext';
 import CreateServerForm from './CreateServerForm';
 import Link from 'next/link';
 import { Channel } from 'stream-chat';
 
-// Use the original name for the local interface
-interface DiscordServer {
+// Rename the local interface to LocalDiscordServer
+interface LocalDiscordServer {
   name: string;
   image?: string; // Optional property
 }
@@ -16,7 +16,7 @@ interface DiscordServer {
 const ServerList = () => {
   const { client } = useChatContext();
   const { server: activeServer, changeServer } = useDiscordContext();
-  const [serverList, setServerList] = useState<DiscordServer[]>([]);
+  const [serverList, setServerList] = useState<LocalDiscordServer[]>([]);
 
   const loadServerList = useCallback(async (): Promise<void> => {
     const channels = await client.queryChannels({
@@ -24,18 +24,19 @@ const ServerList = () => {
       members: { $in: [client.userID as string] },
     });
 
-    const serverSet: Set<DiscordServer> = new Set(
+    const serverSet: Set<LocalDiscordServer> = new Set(
       channels
         .map((channel: Channel) => {
-          const channelData = channel.data.data; // Ensure TypeScript understands the structure
-          return {
-            name: channelData?.server ?? 'Unknown', // Optional chaining and default value
-            image: channelData?.image, // Optional chaining for image
-          };
+          // Check if channel.data is defined before accessing its properties
+          const channelData = channel.data?.data; // Use optional chaining
+          return channelData ? {
+            name: channelData.server ?? 'Unknown', // Use nullish coalescing for default value
+            image: channelData.image, // Safely access image property
+          } : null; // Return null if channelData is undefined
         })
-        .filter((server: DiscordServer) => server.name !== 'Unknown')
+        .filter((server: LocalDiscordServer | null) => server !== null && server.name !== 'Unknown') // Filter out null values
         .filter(
-          (server: DiscordServer, index, self) =>
+          (server: LocalDiscordServer, index, self) =>
             index === self.findIndex((serverObject) => serverObject.name === server.name)
         )
     );
