@@ -29,14 +29,15 @@ const ServerList = () => {
         .map((channel: Channel) => {
           // Check if channel.data is defined before accessing its properties
           const channelData = channel.data?.data; // Use optional chaining
-          return channelData
-            ? {
-                name: channelData.server ?? 'Unknown', // Use nullish coalescing for default value
-                image: channelData.image, // Safely access image property
-              }
-            : null; // Return null if channelData is undefined
+          if (channelData) {
+            return {
+              name: channelData.server ?? 'Unknown', // Use nullish coalescing for default value
+              image: channelData.image, // Safely access image property
+            };
+          }
+          return undefined; // Return undefined for invalid channels
         })
-        .filter((server): server is LocalDiscordServer => server !== null && server.name !== 'Unknown') // Filter out null values and unknown servers
+        .filter((server): server is LocalDiscordServer => server !== undefined && server.name !== 'Unknown') // Filter out undefined and unknown servers
     );
 
     const serverArray = Array.from(serverSet.values());
